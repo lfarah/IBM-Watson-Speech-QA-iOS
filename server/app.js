@@ -35,18 +35,33 @@ require('./config/express')(app);
 
 // Setup credentials - populate the url, username and password.
 // if you're running on a local node.js environment
-var QA_CREDENTIALS = {
-    username: 'qa username',
-    password: 'qa password',
-    version: 'v1',
-    dataset: 'healthcare'
-};
 
-var STT_CREDENTIALS = {
-    username: 'stt username',
-    password: 'stt password',
-    version:'v1'
-};
+
+var QA_CREDENTIALS;
+var STT_CREDENTIALS;
+
+if (process.env.hasOwnProperty("VCAP_SERVICES")) {
+    var env = JSON.parse(process.env.VCAP_SERVICES);
+	QA_CREDENTIALS = env['question_and_answer'][0].credentials;
+	STT_CREDENTIALS = env['speech_to_text'][0].credentials;
+}
+else {
+	//only needed if running Node.js locally
+	QA_CREDENTIALS = {
+		username: '926f5992-4fec-499f-8de9-39f2ddb11061',
+		password: 'dEgNRtTBpMl0'
+	};
+
+	STT_CREDENTIALS = {
+		username: '9807f10f-b609-4f43-8e8e-3ea768aa1a0a',
+		password: 'nuXACmHk2iFg'
+	};
+}
+
+QA_CREDENTIALS.version = "v1";
+QA_CREDENTIALS.dataset = "healthcare";
+
+STT_CREDENTIALS.version = "v1";
 
 // setup watson services
 var question_and_answer_healthcare = watson.question_and_answer(QA_CREDENTIALS);
