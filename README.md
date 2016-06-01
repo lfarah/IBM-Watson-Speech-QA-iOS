@@ -33,7 +33,7 @@ This an architectural overview of the components that make this app run.
 	
 The mobile application connects to the [Mobile Client Access][ama_url] service to provide operational analytics (usage, devices, network utilization) and remote log collection from the client app on the mobile devices.
 
-The app communicates to the [Speech to Text][watson_stt_url] and [Question &amp; Answer][watson_qa_url] servies through the Node.js middelware tier.  
+The app communicates to the [Speech to Text][watson_stt_url] and [Question &amp; Answer][watson_qa_url] services through the Node.js middelware tier.  
 
 For the Speech To Text interaction, the app streams audio from the local device to the Watson Speech To Text Service using the [Watson Speech iOS SDK][watson_ios_sdk].  
 
